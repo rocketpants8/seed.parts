@@ -1,0 +1,40 @@
+@import "colours";
+
+.file-drop-zone {
+	width: 100%;
+	border: 2px dashed $midGrey;
+	border-radius: 4px;
+	padding: 1rem;
+	text-align: center;
+	transition: all 0.3s ease;
+	margin-bottom: 1rem;
+
+	&:hover {
+		border-color: $lightGrey;
+	}
+
+	&.dragover {
+		border-color: $primary;
+	}
+
+	.file-drop-content {
+		width: 100%;
+		gap: 1rem;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		fa-icon {
+			font-size: 2rem;
+			color: $midGrey;
+		}
+
+		p {
+			margin: 0;
+		}
+
+		.button {
+			margin-top: 0;
+		}
+	}
+}

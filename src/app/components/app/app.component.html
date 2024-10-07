@@ -1,0 +1,42 @@
+<header>
+	<div class="container">
+		<nav class="navbar" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item" routerLink="/">
+					<img src="assets/logo-small.png" alt="Seed.Parts Logo">
+					<span class="navbar-item-title">Seed.Parts</span>
+				</a>
+
+				<a role="button" [class.is-active]="menuActive" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainMenu" #burger (click)="toggleMenu()">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+
+			</div>
+
+			<div class="navbar-menu" [class.is-active]="menuActive" id="mainMenu" #mainMenu>
+				<div class="navbar-start">
+					<a class="navbar-item" routerLink="/create" routerLinkActive="is-active">Create</a>
+					<a class="navbar-item" routerLink="/decrypt" routerLinkActive="is-active">Decrypt</a>
+					<a class="navbar-item" routerLink="/about" routerLinkActive="is-active">About</a>
+				</div>
+
+			</div>
+		</nav>
+	</div>  
+	<notifications></notifications>
+</header>
+<section class="section">
+	<div class="container">
+		<router-outlet (activate)="toggleMenu(false)"></router-outlet>
+	</div>
+</section>
+<footer class="footer">
+	<div class="content has-text-centered">
+		<p>
+			<strong>Seed.Parts</strong> by <a href="https://github.com/rocketpants8">rocketpants</a>. The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+		</p>
+	</div>
+</footer>

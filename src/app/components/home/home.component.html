@@ -1,0 +1,42 @@
+<h1 class="title">Seed.Parts</h1>
+
+<div>
+  <p>Seed.Parts allows you to securely store and distribute your Bitcoin seed phrase (or any other data). Seed.Parts encrypts your secret (using either a password, or public key encryption) and uses <a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing" target="_blank">Shamir's secret sharing</a> to split it into multiple components, requiring a minimum number of shares to be combined in order to decrypt the secret.</p>
+  <p>Seed.Parts does not:</p>
+  <ul class="has-bullets">
+    <li>Have any knowledge of your secret</li>
+    <li>Send your secret to anyone</li>
+    <li>Store your secret</li>
+  </ul>
+</div>
+
+<div class="columns is-vcentered mt-5 mb-5">
+  <div class="column">
+    <div class="box has-text-centered">
+      <h2 class="subtitle">Create a new secret</h2>
+      <p>Encrypt some data, and split it into shares.</p>
+      <!-- Large button for creating a secret -->
+      <button class="button is-primary is-large mt-4" routerLink="/create">Create Secret</button>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="box has-text-centered">
+      <h2 class="subtitle">Decrypt a secret</h2>
+      <p>Combine shares to decrypt a secret.</p>
+      <!-- Large button for decrypting a secret -->
+      <button class="button is-info is-large mt-4" routerLink="/decrypt">Decrypt Secret</button>
+    </div>
+  </div>
+</div>
+
+
+<section>
+  <h2 class="subtitle">Disclaimer</h2>
+  <ul class="has-bullets">
+    <li>Shamir secret sharing is a cryptographic technique that allows a secret to be split into multiple shares, and requires a minimum number of shares to be combined in order to decrypt the secret. Splitting a secret into multiple shards brings with it a different set of risks and problems. <a href="https://twitter.com/lopp">Jameson Lopp</a> has a good article discussing <a href="https://blog.casa.io/shamirs-secret-sharing-security-shortcomings/" target="_blank">the shortcomings of Shamir's secret sharing</a>.</li>
+    <li>This utility relies on other open source projects for cryptographic security, and in particular these implementations of <a href="https://github.com/openpgpjs/openpgpjs">PGP</a> and <a href="https://github.com/jwerle/shamirs-secret-sharing">Shamir's secret sharing</a></li>
+    <li>If you lose your shares, encryption password or private key, I cannot help you; there is no way to recover your secret.</li>
+  </ul>
+</section>
+

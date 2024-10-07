@@ -1,0 +1,61 @@
+@import "colours";
+
+:root {
+	--horizontal-padding: 0.5rem;
+	--vertical-padding: 0.25rem;
+}
+
+.ta-results {
+	position: absolute;
+	top: 100%;
+	min-width: 100%;
+	border: 1px solid $grey;
+	border-radius: 4px;
+	overflow: auto;
+	max-height: 40vh;
+	z-index: 10;
+	background: hsl(var(--bulma-input-h), var(--bulma-input-s), calc(var(--bulma-input-background-l) + var(--bulma-input-background-l-delta)));
+}
+
+.ta-backdrop {
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 1;
+}
+
+.ta-item {
+	position: relative;
+	z-index: 2;
+	display: block;
+	width: 100%;
+	cursor: pointer;
+	text-align: left;
+	border-radius: 0;
+	border: 0;
+	background: hsl(var(--bulma-input-h), var(--bulma-input-s), calc(var(--bulma-input-background-l) + var(--bulma-input-background-l-delta)));
+	padding-left: var(--horizontal-padding, 0.5rem);
+	padding-right: var(--horizontal-padding, 0.5rem);
+	padding-top: var(--vertical-padding, 0.5rem);
+	padding-bottom: var(--vertical-padding, 0.5rem);
+
+	&:hover {
+		background-color: var(--primary, $primary);
+	}
+
+	&.active {
+		background: $primary;
+		background: var(--primary, $primary);
+		color: #fff;
+	}
+
+	&:first-child {
+		border-radius: 4px 4px 0 0;
+	}
+
+	&:last-child {
+		border-radius: 0 0 4px 4px;
+	}
+}

@@ -1,0 +1,84 @@
+@import "colours";
+
+:root {
+	--primary: #007bff;
+	--text-color: #9b9b9b;
+	--bulma-scheme-main: #101010;
+	--background-color-light: #202030;
+	--placeholder-color: rgba(202, 202, 202, 0.4);
+	--bulma-body-background-color: #101010;
+	--bulma-scheme-main-bis: #1a1a1a;
+	--bulma-navbar-item-hover-background-l-delta: 0.05;
+	--bulma-body-color: var(--text-color);
+	--bulma-label-color: var(--text-color);
+}
+
+.navbar-link,
+.navbar-link,
+.navbar-link,
+a.navbar-item,
+a.navbar-item,
+a.navbar-item {
+	--bulma-navbar-item-color: var(--text-color);
+}
+
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover {
+	--bulma-navbar-item-color: var(--primary);
+	--bulma-navbar-item-background-a: 0;
+}
+
+.footer {
+	--bulma-footer-padding: 2rem 0;
+}
+
+.box {
+	--bulma-box-background-color: var(--background-color-light);
+	--bulma-box-color: var(--text-color);
+}
+
+.field.is-horizontal {
+	.field-label {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+}
+
+header, .navbar {
+	background-color: var(--bulma-scheme-main-bis);
+}
+
+h2.subtitle {
+	color: $primary;
+}
+
+.input,
+.select select,
+.textarea {
+	background-color: var(--bulma-scheme-main-bis);
+	color: var(--text-color);
+}
+
+.control {
+	.button, .button.is-static {
+		background-color: var(--background-color-light);
+		color: var(--text-color);
+	}
+}
+
+button.is-primary {
+	background-color: var(--primary);
+}
+
+button.is-primary:hover {
+	background-color: var(--primary);
+}
+
+.input::placeholder, .select select::placeholder, .textarea::placeholder {
+	--bulma-input-placeholder-color: var(--placeholder-color);
+}

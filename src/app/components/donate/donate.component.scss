@@ -1,0 +1,26 @@
+#donate {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1rem;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+img.is-250x250 {
+  width: 250px;
+  height: 250px;
+}
+
+ul {
+  list-style: disc;
+  margin-bottom: 2rem;
+
+  li {
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+  }
+}

@@ -1,0 +1,11 @@
+<div id="notifications" class="is-fixed" *ngIf="hasNotifications">
+	<ng-container *ngFor="let notification of notifications">
+		<article class="message is-small" [ngClass]="{'removing': notification.deleted, 'is-success': notification.type === notificationTypes.success, 'is-danger': notification.type === notificationTypes.error, 'is-warning': notification.type === notificationTypes.warning, 'is-info': notification.type === notificationTypes.information}">
+			<div class="message-header">
+				<p>{{ notification.title }}</p>
+				<button class="delete" (click)="remove(notification)"></button>
+			</div>
+			<div class="message-body" [innerHTML]="notification.message"></div>
+		</article>
+	</ng-container>
+</div>
