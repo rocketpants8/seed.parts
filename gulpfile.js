@@ -5,10 +5,13 @@ const { src, dest, series, parallel } = require('gulp');
 const fs = require("fs");
 const replace = require('gulp-replace');
 const rename = require('gulp-rename');
+const git = require('gulp-git');
 const cp = require('child_process');
 
 const stages = ['local', 'prod'];
 const versionFilename = "./version.txt";
+const srcDir = "./src";
+const configFilename = "config.ts";
 
 /**
  * The AWS cloudfront distribution. If this has not been configured, leave it blank (`undefined`).
@@ -53,22 +56,39 @@ function syncCmd(stage) {
 	return cp.exec(cmd);
 }
 
-function newVersion(currentVersion) {
+function newVersion(currentVersion, changeType) {
 	const versionComponents = currentVersion.split(".");
 
-	const major = Number(versionComponents[0]);
-	const minor = Number(versionComponents[1]);
-	let patch = 1 + Number(versionComponents[2]);
+	let [major, minor, patch] = versionComponents.map(Number);
+
+	switch (changeType) {
+		case "patch":
+			patch += 1;
+			break;
+		case "minor":
+			minor += 1;
+			patch = 0;
+			break;
+		case "major":
+			major += 1;
+			minor = 0;
+			patch = 0;
+			break;
+	}
 
 	const result = `${major}.${minor}.${patch}`;
-	fs.writeFileSync(versionFilename, result, "utf8");
+	// fs.writeFileSync(versionFilename, result, "utf8");
 	console.log(`New version is ${result}`);
 	return result;
 }
 
 function getVersion() {
-	const versionString = fs.readFileSync(versionFilename, "utf8");
-	return versionString.replace(/[^\d.]/g, '');
+	const config = fs.readFileSync(`${srcDir}/${configFilename}`, "utf8");
+	const matches = config.match(/"version": "(\d+\.\d+\.\d+)"/);
+	if (!!matches && matches.length > 1) {
+		return matches[1];
+	}
+	return "0.0.0";
 }
 
 function backupCmd(stage) {
@@ -96,11 +116,26 @@ function invalidateDistributionCmd(stage) {
 }
 
 function patchCmd() {
-	return new Promise((resolve, reject) => {
-		const version = getVersion();
-		newVersion(version);
-		resolve();
-	});
+	const nextVersion = newVersion(getVersion(), "patch");
+	return configCmd(nextVersion);
+}
+
+function minorCmd() {
+	const nextVersion = newVersion(getVersion(), "minor");
+	return configCmd(nextVersion);
+}
+
+function majorCmd() {
+	const nextVersion = newVersion(getVersion(), "major");
+	return configCmd(nextVersion);
+}
+
+function configCmd(version) {
+	console.log(`Setting version to ${version}`);
+	// const version = getVersion();
+	return src(`${srcDir}/${configFilename}`)
+		.pipe(replace(/"version".*$/im, `"version": "${version}"`))
+		.pipe(dest(srcDir));
 }
 
 function isProd(stage) {
