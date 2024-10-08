@@ -4,6 +4,7 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "paths": {
+      "@root/*": ["./src/*"],
       "@utils": ["./src/app/classes/utils.ts"],
       "@classes/*": ["./src/app/classes/*"],
       "@models/*": ["./src/app/models/*"],

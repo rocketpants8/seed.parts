@@ -1,4 +1,5 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
+import config from '@root/config';
 
 @Component({
   "selector": "app-root",
@@ -18,4 +19,6 @@ export class AppComponent {
   }
 
   public readonly title = 'Seed.Parts';
+
+  public readonly version = config.version;
 }
