@@ -4,8 +4,6 @@
 const { src, dest, series, parallel } = require('gulp');
 const fs = require("fs");
 const replace = require('gulp-replace');
-const rename = require('gulp-rename');
-const git = require('gulp-git');
 const cp = require('child_process');
 
 const stages = ['local', 'prod'];
@@ -173,16 +171,6 @@ function checkInvalidationStatusCmd(stage) {
 	});
 }
 
-function tagCmd() {
-	const version = getVersion();
-	const tag = `v${version}`;
-	console.log(`Tagging ${tag}`);
-	return src(`${srcDir}/${configFilename}`)
-	       .pipe(git.add())
-	       .pipe(git.commit(`chore: version bump to ${version}`))
-	      //  .pipe(git.tag(tag, `Deployed on ${new Date().toISOString()}`));
-}
-
 /**
 * Constructs the various named tasks and exports those which are public: stage.build and stage.sync
 */
@@ -192,7 +180,6 @@ function createTasks(stage) {
 		"patch": "patch",
 		"minor": "minor",
 		"major": "major",
-		"tag": "tag",
 		"build": `${stage}.build`,
 		"make": `${stage}.make`,
 		"backup": `${stage}.backup`,
@@ -204,8 +191,6 @@ function createTasks(stage) {
 	funcs[tasks.patch] = patchCmd.bind(null);
 	funcs[tasks.minor] = minorCmd.bind(null);
 	funcs[tasks.major] = majorCmd.bind(null);
-
-	funcs[tasks.tag] = tagCmd.bind(null);
 
 	funcs[tasks.build] = buildCmd.bind(null, stage);
 	funcs[tasks.backup] = backupCmd.bind(null, stage);
@@ -230,7 +215,6 @@ function createTasks(stage) {
 	exports[tasks.minor] = funcs[tasks.minor];
 	exports[tasks.major] = funcs[tasks.major];
 	exports[tasks.make] = funcs[tasks.make];
-	exports[tasks.tag] = funcs[tasks.tag];
 	exports[tasks.build] = funcs[tasks.build];
 	exports[tasks.backup] = funcs[tasks.backup];
 	exports[tasks.status] = funcs[tasks.status];
