@@ -1,27 +1,26 @@
-# Secrets
+# Seed.Parts
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
+Seed.Parts is a simple web application that uses Shamir's Secret Sharing algorithm to split a secret into multiple parts. Each part can be stored in separate locations. The application allows you to reconstruct the secret by gathering a threshold number of parts.
 
-## Development server
+## What It Does
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Secrets provides a safe and user-friendly platform for:
 
-## Code scaffolding
+1. **Secret Sharing**: Safely share secrets with others using Shamir's Secret Sharing algorithm. This allows you to split a secret into multiple parts, which can be distributed to different people or stored in separate locations.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. **Secret Reconstruction**: Reconstruct your original secret by gathering a threshold number of parts. This ensures that your secret remains secure even if some parts are lost or compromised.
 
-## Build
+3. **Encryption**: It is recommended that you encrypt your secret before splitting it. Seed.Parts provides options for securely encrypting your secret using symmetric (password) or asymmetric (private/public key) encryption.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## What It Doesn't Do
 
-## Running unit tests
+1. **Transmit your secrets**: This application works entirely within your browser and client side. It does not collect or transmit any information.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. **Storage**: This application does not provide any storage for your secrets or secret parts. You are responsible for storing the parts in secure locations.
 
-## Running end-to-end tests
+## Why Use Seed.Parts?
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Enhanced Security**: By splitting your secrets, you reduce the risk of unauthorized access.
+- **Peace of Mind**: Know that your sensitive information is protected by advanced cryptographic techniques.
+- **Collaboration**: Safely share confidential data with team members or trusted individuals.
+- **Disaster Recovery**: Reconstruct your secrets even if some parts are lost, as long as you have the threshold number of parts.
