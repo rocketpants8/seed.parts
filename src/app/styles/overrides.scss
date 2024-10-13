@@ -27,7 +27,8 @@ a.navbar-item {
 .navbar-link:hover,
 a.navbar-item:focus,
 a.navbar-item:focus-within,
-a.navbar-item:hover {
+a.navbar-item:hover,
+a.navbar-item.is-active {
 	--bulma-navbar-item-color: var(--primary);
 	--bulma-navbar-item-background-a: 0;
 }
