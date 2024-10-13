@@ -101,6 +101,7 @@ export class Model {
 
 		this.bip39Language.setValue(Bip39Language.preferredLanguage());
 		this.setEncryptionType(this.encryptionType.value);
+		this.encryptionType.valueChanges.subscribe(this.setEncryptionType.bind(this));
 	}
 
 	private buildWordControls(value: number) {
@@ -135,6 +136,8 @@ export class Model {
 				this.confirmPassword.clearValidators();
 				break;
 		}
+		this.password.updateValueAndValidity();
+		this.confirmPassword.updateValueAndValidity();
 	}
 
 	public get dataToEncrypt(): string {
