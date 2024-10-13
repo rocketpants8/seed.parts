@@ -8,6 +8,9 @@ import { EncryptionType } from '@classes/encryptionType';
 import { assert } from "@classes/assert";
 import { NotificationService } from "@services/notification.service";
 import * as openpgp from "openpgp";
+import messageMarkers from "@classes/messageHeader";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+
 @Component({
 	"templateUrl": "./decrypt.component.html",
 	"styleUrl": "./decrypt.component.scss"
@@ -17,6 +20,7 @@ export class DecryptComponent extends BaseComponent {
 	private readonly pgpHeader = "-----BEGIN PGP MESSAGE-----";
 	private _encryptionType: EncryptionType = EncryptionType.NONE;
 	private _combinedShares: string|null = null;
+	private _invalidPassword: boolean = true;
 
 	public readonly model = new DecryptModel();
 	private readonly decrypt = new Decrypt(this.model);
@@ -31,6 +35,7 @@ export class DecryptComponent extends BaseComponent {
 		// this.model.devSettings();
 		this.decode();
 		this.autoUnsubscribe(this.model.shares.valueChanges).subscribe(this.decode.bind(this));
+		this.autoUnsubscribe(this.model.password.valueChanges).pipe(debounceTime(250), distinctUntilChanged()).subscribe(this.applyCredentials.bind(this));
 	}
 
 	private stringToUint8Array(str: string): Uint8Array {
@@ -66,7 +71,11 @@ export class DecryptComponent extends BaseComponent {
 			return;
 		}
 
-		if (this._combinedShares.startsWith(this.pgpHeader)) {
+		if (this._combinedShares.startsWith(messageMarkers.header) && this._combinedShares.endsWith(messageMarkers.footer)) {
+			this._encryptionType = EncryptionType.NONE;
+			this.model.secret.setValue(this._combinedShares.substring(messageMarkers.header.length+1, this._combinedShares.length - messageMarkers.footer.length-1));
+		}
+		else if (this._combinedShares.startsWith(this.pgpHeader)) {
 			this.model.secret.setValue(null);
 
 			if (await this.decrypt.isEncryptedWithPubKey(this._combinedShares)) {
@@ -75,9 +84,10 @@ export class DecryptComponent extends BaseComponent {
 			else {
 				this._encryptionType = EncryptionType.PASSWORD;
 			}
+			this.applyCredentials();
 		}
 		else {
-			this.model.secret.setValue(this._combinedShares);
+			this.model.secret.setValue(null);
 		}
 	}
 
@@ -99,6 +109,7 @@ export class DecryptComponent extends BaseComponent {
 			}
 		}
 		catch (e) {
+			this._invalidPassword = true;
 			return;
 		}
 
@@ -106,15 +117,17 @@ export class DecryptComponent extends BaseComponent {
 			switch (this.encryptionType) {
 				case EncryptionType.PASSWORD:
 					this.model.secret.setValue(await this.decrypt.decryptWithPassword(this._combinedShares));
+					this._invalidPassword = false;
 					break;
 				case EncryptionType.KEY:
 					this.model.secret.setValue(await this.decrypt.decryptWithKey(this._combinedShares));
-				break;
+					this._invalidPassword = false;
+					break;
 			}
 		}
 		catch (e) {
+			this._invalidPassword = true;
 			this.model.secret.setValue(null);
-			NotificationService.error("Failed to decrypt", "The credentials you provided are invalid.");
 		}
 	}
 
@@ -211,6 +224,9 @@ export class DecryptComponent extends BaseComponent {
 		return this.model.privateKey.value !== null && (this.model.keyPasswordRequired.value ?? false);
 	}
 
-	
+	public get invalidPassword(): boolean {
+		return this._invalidPassword;
+	}
+
 	public readonly encryptionTypes = EncryptionType.values;
 }

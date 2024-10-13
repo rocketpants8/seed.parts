@@ -14,6 +14,8 @@ import {
   faFileImport,
   faFileText,
   faKey,
+  faLock,
+  faLockOpen,
   faTrashCan,
   faTriangleExclamation,
   faWallet
@@ -32,6 +34,8 @@ export function initIconLibrary(library: FaIconLibrary): void {
     faFileImport,
     faFileText,
     faKey,
+    faLock,
+    faLockOpen,
     faTrashCan,
     faTriangleExclamation,
     faWallet

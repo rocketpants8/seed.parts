@@ -1,10 +1,9 @@
 import * as openpgp from "openpgp";
-import { assert } from "./assert";
+import { assert } from "@classes/assert";
+import messageMarkers from "@classes/messageHeader";
 
 export abstract class Encrypt {
-
 	public abstract encrypt(secret: string, credentials?: string): Promise<string>;
-
 }
 
 export class NoEncrypt extends Encrypt {
@@ -13,8 +12,12 @@ export class NoEncrypt extends Encrypt {
 		super();
 	}
 
+	private wrapMessage(secret: string): string {
+		return [messageMarkers.header, secret, messageMarkers.footer].join("\n");
+	}
+
 	public override async encrypt(secret: string): Promise<string> {
-		return secret;
+		return this.wrapMessage(secret);
 	}
 }
 
@@ -33,9 +36,9 @@ export class PasswordEncrypt extends Encrypt {
 	public override async encrypt(secret: string, password: string): Promise<string> {
 		assert(secret.length > 0, "Secret cannot be empty");
 		assert.hasValue(password, "Password cannot be empty");
-		assert(password.length > 0, "Password cannot be empty");	
+		assert(password.length > 0, "Password cannot be empty");
 
-		const msg = await openpgp.createMessage({"text": secret});
+		const msg = await openpgp.createMessage({ "text": secret });
 		const encrypted = await openpgp.encrypt({
 			"message": msg,
 			"passwords": [password]
@@ -59,6 +62,7 @@ export class PKEncrypt extends Encrypt {
 	public override async encrypt(secret: string, publicKey: string): Promise<string> {
 		assert.hasValue(publicKey, "Public key cannot be empty");
 		assert(publicKey.length > 0, "Public key cannot be empty");
+
 		const msg = await openpgp.createMessage({"text": secret});
 		const key = await openpgp.readKey({"armoredKey": publicKey.trim() });
 

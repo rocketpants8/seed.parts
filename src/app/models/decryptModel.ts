@@ -1,7 +1,8 @@
-import { FormControl, FormArray, Validators } from '@angular/forms';
+import { FormControl, FormArray, Validators, FormGroup } from '@angular/forms';
 import { assert } from '@classes/assert';
 
 export class DecryptModel {
+
 	public readonly shares = new FormArray<FormControl<string>>([
 		new FormControl<string>('', { "nonNullable": true, validators: [Validators.required] }),
 		new FormControl<string>('', { "nonNullable": true, validators: [Validators.required] })

@@ -46,14 +46,7 @@
 			<label class="label">Decryption Password</label>
 		</div>
 		<div class="field-body">
-			<div class="field has-addons">
-				<div class="control is-expanded">
-					<input class="input" type="password" [formControl]="model.password" (keyup.enter)="applyCredentials()" />
-				</div>
-				<div class="control">
-					<button class="button" type="button" (click)="applyCredentials()"><fa-icon [icon]="['fas', 'key']"></fa-icon></button>
-				</div>
-			</div>
+			<ng-container [ngTemplateOutlet]="passwordField"></ng-container>
 		</div>
 	</div>
 </fieldset>
@@ -105,14 +98,7 @@
 			<label class="label">Private Key Password</label>
 		</div>
 		<div class="field-body">
-			<div class="field has-addons">
-				<div class="control is-expanded">
-					<input class="input" type="password" [formControl]="model.password" (keyup.enter)="applyCredentials()" />
-				</div>
-				<div class="control">
-					<button class="button" type="button" (click)="applyCredentials()"><fa-icon [icon]="['fas', 'key']"></fa-icon></button>
-				</div>
-			</div>
+			<ng-container [ngTemplateOutlet]="passwordField"></ng-container>
 		</div>
 	</div>
 
@@ -125,3 +111,13 @@
 		<textarea class="textarea" readonly [formControl]="model.secret"></textarea>
 	</div>
 </div>
+
+<ng-template #passwordField>
+	<div class="field">
+		<div class="control is-expanded has-icons-right">
+			<input class="input" type="password" [formControl]="model.password" />
+			<span class="icon is-right" *ngIf="invalidPassword" title="Invalid credentials"><fa-icon class="has-text-danger" [icon]="['fas', 'lock']"></fa-icon></span>
+			<span class="icon is-right" *ngIf="!invalidPassword"><fa-icon class="has-text-success" [icon]="['fas', 'lock-open']"></fa-icon></span>
+		</div>
+	</div>
+</ng-template>
