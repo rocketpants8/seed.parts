@@ -19,7 +19,7 @@
       <button class="button is-primary is-large mt-4" routerLink="/create">Create Secret</button>
     </div>
   </div>
-  
+
   <div class="column">
     <div class="box has-text-centered">
       <h2 class="subtitle">Decrypt a secret</h2>
@@ -35,7 +35,7 @@
   <h2 class="subtitle">Disclaimer</h2>
   <ul class="has-bullets">
     <li>Shamir secret sharing is a cryptographic technique that allows a secret to be split into multiple shares, and requires a minimum number of shares to be combined in order to decrypt the secret. Splitting a secret into multiple shards brings with it a different set of risks and problems. <a href="https://twitter.com/lopp">Jameson Lopp</a> has a good article discussing <a href="https://blog.casa.io/shamirs-secret-sharing-security-shortcomings/" target="_blank">the shortcomings of Shamir's secret sharing</a>.</li>
-    <li>This utility relies on other open source projects for cryptographic security, and in particular these implementations of <a href="https://github.com/openpgpjs/openpgpjs">PGP</a> and <a href="https://github.com/jwerle/shamirs-secret-sharing">Shamir's secret sharing</a></li>
+    <li>This utility relies on other open source projects for cryptographic security, and in particular these implementations of <a href="https://github.com/openpgpjs/openpgpjs">PGP</a> and <a href="https://github.com/privy-io/shamir-secret-sharing">Shamir secret sharing</a></li>
     <li>If you lose your shares, encryption password or private key, I cannot help you; there is no way to recover your secret.</li>
   </ul>
 </section>
