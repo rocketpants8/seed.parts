@@ -1,4 +1,4 @@
-@import "colours";
+@use "colours" as *;
 
 :root {
 	--horizontal-padding: 0.5rem;

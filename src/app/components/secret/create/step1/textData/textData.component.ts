@@ -1,10 +1,12 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { Model, SecretType } from "@models/model";
 
 @Component({
-	"selector": "text-data[model]",
-	"templateUrl": "./textData.component.html",
-	"styleUrls": ["./textData.component.scss"]
+    "selector": "text-data[model]",
+    "templateUrl": "./textData.component.html",
+    "styleUrls": ["./textData.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class TextDataComponent {
 	@Input()

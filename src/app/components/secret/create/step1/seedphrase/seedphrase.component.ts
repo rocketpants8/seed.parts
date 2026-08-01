@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { Model } from "@models/model";
 import { getBip39WordMap, Bip39Language } from "@classes/bip39WordList";
 import { assert } from "@classes/assert";
@@ -29,9 +29,11 @@ class WordList {
 }
 
 @Component({
-	"selector": "seedphrase[model]",
-	"templateUrl": "./seedphrase.component.html",
-	"styleUrls": ["./seedphrase.component.scss"]
+    "selector": "seedphrase[model]",
+    "templateUrl": "./seedphrase.component.html",
+    "styleUrls": ["./seedphrase.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class SeedphraseComponent {
 

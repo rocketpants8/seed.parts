@@ -1,11 +1,13 @@
-import { Component, OnDestroy, AfterViewInit } from "@angular/core";
+import { Component, OnDestroy, AfterViewInit, ChangeDetectionStrategy } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { ServiceLocator } from "./serviceLocator";
 import { Router } from "@angular/router";
 
 @Component({
-	"template": ""
+    "template": "",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export abstract class BaseComponent implements OnDestroy, AfterViewInit {
 

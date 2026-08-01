@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from "@angular/core";
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from "@angular/core";
 import { BaseComponent } from "@classes/baseComponent";
 import { Model, DownloadFormat } from '@models/model';
 import { EncryptionType } from '@classes/encryptionType';
@@ -12,9 +12,11 @@ import { ArchiveService } from "@services/archive.service";
 import { NotificationService } from "@services/notification.service";
 
 @Component({
-	"selector": "step4[model]",
-	"templateUrl": "./step4.component.html",
-	"styleUrls": ["./step4.component.scss"]
+    "selector": "step4[model]",
+    "templateUrl": "./step4.component.html",
+    "styleUrls": ["./step4.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class Step4Component extends BaseComponent {
 

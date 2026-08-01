@@ -4,11 +4,21 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "paths": {
-      "@root/*": ["./src/*"],
-      "@utils": ["./src/app/classes/utils.ts"],
-      "@classes/*": ["./src/app/classes/*"],
-      "@models/*": ["./src/app/models/*"],
-      "@services/*": ["./src/app/services/*"]
+      "@root/*": [
+        "./src/*"
+      ],
+      "@utils": [
+        "./src/app/classes/utils.ts"
+      ],
+      "@classes/*": [
+        "./src/app/classes/*"
+      ],
+      "@models/*": [
+        "./src/app/models/*"
+      ],
+      "@services/*": [
+        "./src/app/services/*"
+      ]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -22,15 +32,11 @@
     "declaration": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

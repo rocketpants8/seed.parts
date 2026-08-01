@@ -1,10 +1,12 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { FormControl } from "@angular/forms";
 
 @Component({
-	"selector": "password[control]",
-	"templateUrl": "./password.component.html",
-	"styleUrls": []
+    "selector": "password[control]",
+    "templateUrl": "./password.component.html",
+    "styleUrls": [],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class PasswordComponent {
 

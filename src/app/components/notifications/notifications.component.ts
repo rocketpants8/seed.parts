@@ -1,11 +1,13 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Notification, NotificationType, NotificationService } from "@services/notification.service";
 
 @Component({
-	"selector": "notifications",
-	"templateUrl": "./notifications.component.html",
-	"styleUrls": ["./notifications.component.scss"]
+    "selector": "notifications",
+    "templateUrl": "./notifications.component.html",
+    "styleUrls": ["./notifications.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class NotificationComponent implements OnDestroy {
 

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from "@angular/core";
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { BaseComponent } from "@classes/baseComponent";
 import { Model } from '@models/model';
@@ -8,9 +8,11 @@ import { NotificationService } from "@services/notification.service";
 import * as openpgp from "openpgp";
 
 @Component({
-	"selector": "step3[model]",
-	"templateUrl": "./step3.component.html",
-	"styleUrls": ["./step3.component.scss"]
+    "selector": "step3[model]",
+    "templateUrl": "./step3.component.html",
+    "styleUrls": ["./step3.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class Step3Component extends BaseComponent {
 

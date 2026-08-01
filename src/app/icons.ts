@@ -1,4 +1,4 @@
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome/icon-library';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 import {
   faBitcoin

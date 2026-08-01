@@ -1,13 +1,15 @@
-import { Component, Input, EventEmitter, Output } from "@angular/core";
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { BaseComponent } from "@classes/baseComponent";
 import { Model } from '@models/model';
 import { Subject } from "rxjs";
 
 @Component({
-	"selector": "step2[model]",
-	"templateUrl": "./step2.component.html",
-	"styleUrls": ["./step2.component.scss"]
+    "selector": "step2[model]",
+    "templateUrl": "./step2.component.html",
+    "styleUrls": ["./step2.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class Step2Component extends BaseComponent {
 

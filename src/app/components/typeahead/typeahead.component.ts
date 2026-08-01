@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Renderer2, QueryList, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, AfterViewInit, Output, TemplateRef, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Renderer2, QueryList, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, AfterViewInit, Output, TemplateRef, ViewChild, ViewChildren, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
 import { of, from, Observable, Subject } from 'rxjs';
 import { concatWith, debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil, tap, take } from 'rxjs/operators';
 import { Key, TypeAhead } from "./typeahead.utils";
@@ -29,9 +29,11 @@ export namespace Unselectable {
 }
 
 @Component({
-	"selector": "[typeahead]",
-	"templateUrl": "./typeahead.component.html",
-	"styleUrls": ["./typeahead.component.scss"]
+    "selector": "[typeahead]",
+    "templateUrl": "./typeahead.component.html",
+    "styleUrls": ["./typeahead.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class TypeaheadComponent implements OnInit, OnDestroy, AfterViewInit {
 

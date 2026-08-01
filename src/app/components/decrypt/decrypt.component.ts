@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { BaseComponent } from "@classes/baseComponent";
 import { DecryptModel } from "@models/decryptModel";
 import { combine } from "shamir-secret-sharing";
@@ -12,8 +12,10 @@ import messageMarkers from "@classes/messageHeader";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
-	"templateUrl": "./decrypt.component.html",
-	"styleUrl": "./decrypt.component.scss"
+    "templateUrl": "./decrypt.component.html",
+    "styleUrl": "./decrypt.component.scss",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class DecryptComponent extends BaseComponent {
 

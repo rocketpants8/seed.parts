@@ -1,4 +1,4 @@
-@import "colours";
+@use "colours" as *;
 
 :root {
 	--primary: #007bff;

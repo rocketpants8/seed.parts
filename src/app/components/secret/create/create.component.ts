@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ChangeDetectionStrategy } from '@angular/core';
 import { BaseComponent } from '@classes/baseComponent';
 import { Model } from '@models/model';
 
@@ -14,8 +14,10 @@ namespace Step {
 }
 
 @Component({
-	"templateUrl": "./create.component.html",
-	"styleUrl": "./create.component.scss"
+    "templateUrl": "./create.component.html",
+    "styleUrl": "./create.component.scss",
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class CreateComponent extends BaseComponent {
 
