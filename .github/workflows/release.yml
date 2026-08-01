@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build production bundle
+        run: yarn build -c production
+
+      - name: Package zip and checksums
+        run: bash scripts/package-release.sh
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/*.zip
+            release/SHA256SUMS
+          generate_release_notes: true
+          body: |
+            ## Local bundle
+
+            Download `seed-parts-*.zip`, verify with `SHA256SUMS`, then serve the extracted files locally:
+
+            ```bash
+            unzip seed-parts-*.zip -d seed-parts
+            cd seed-parts
+            npx --yes serve -l 8080
+            ```
+
+            Open http://localhost:8080. Prefer running offline after download for maximum peace of mind.

@@ -24,3 +24,39 @@ Secrets provides a safe and user-friendly platform for:
 - **Peace of Mind**: Know that your sensitive information is protected by advanced cryptographic techniques.
 - **Collaboration**: Safely share confidential data with team members or trusted individuals.
 - **Disaster Recovery**: Reconstruct your secrets even if some parts are lost, as long as you have the threshold number of parts.
+
+## Run a release bundle locally
+
+GitHub Releases include a static zip (`seed-parts-<version>.zip`) and `SHA256SUMS`. Prefer this when you want to run offline without trusting a hosted site.
+
+```bash
+# Verify (Linux/macOS)
+sha256sum -c SHA256SUMS
+
+unzip seed-parts-<version>.zip -d seed-parts
+cd seed-parts
+npx --yes serve -l 8080
+# or: python3 -m http.server 8080
+```
+
+Open http://localhost:8080. Do not open `index.html` via `file://`.
+
+## Cut a GitHub Release
+
+1. Bump the version in `src/config.ts` (or use the existing gulp `patch` / `minor` / `major` tasks).
+2. Commit the version bump.
+3. Tag and push:
+
+```bash
+git tag v1.2.0
+git push github main --tags
+```
+
+Pushing a `v*` tag runs [.github/workflows/release.yml](.github/workflows/release.yml), which builds the production app, creates the zip + checksums, and publishes a GitHub Release.
+
+To package locally without publishing:
+
+```bash
+yarn package:release
+# outputs release/seed-parts-<version>.zip and release/SHA256SUMS
+```
